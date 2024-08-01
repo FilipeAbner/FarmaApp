@@ -42,7 +42,8 @@ class ComprarPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8),
-                  if (medicamento.precoDesconto != null) // Verifica se há desconto
+                  if (medicamento.precoDesconto !=
+                      null) // Verifica se há desconto
                     Row(
                       children: [
                         Text(
@@ -57,7 +58,8 @@ class ComprarPage extends StatelessWidget {
                           'Por: ${medicamento.precoDesconto!.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.green, // Cor verde para o preço com desconto
+                            color: Colors
+                                .green, // Cor verde para o preço com desconto
                           ),
                         ),
                       ],
@@ -68,7 +70,8 @@ class ComprarPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black, // Cor vermelha para o preço sem desconto
+                        color: Colors
+                            .black, // Cor vermelha para o preço sem desconto
                       ),
                     ),
                 ],
@@ -86,7 +89,8 @@ class Medicamento {
   final String imagem;
   final double preco;
   final double precoAntigo;
-  final double? precoDesconto; // Tornando o parâmetro opcional usando o tipo double?
+  final double?
+      precoDesconto; // Tornando o parâmetro opcional usando o tipo double?
 
   Medicamento({
     required this.nome,
@@ -101,26 +105,26 @@ class Medicamento {
 List<Medicamento> medicamentos = [
   Medicamento(
     nome: 'Paracetamol',
-    imagem: 'assets/paracetamol.jpg',
+    imagem: 'lib/images/paracetamol.jpg',
     preco: 10.0,
     precoAntigo: 12.0,
     precoDesconto: 9.0,
   ),
   Medicamento(
     nome: 'Ibuprofeno',
-    imagem: 'assets/ibuprofeno.jpg',
+    imagem: 'lib/images/ibuprofeno.jpg',
     preco: 15.0,
   ),
   Medicamento(
     nome: 'Dipirona',
-    imagem: 'assets/dipirona.jpg',
+    imagem: 'lib/images/dipirona.jpg',
     preco: 8.0,
     precoAntigo: 10.0,
     precoDesconto: 7.0,
   ),
   Medicamento(
     nome: 'Aspirina',
-    imagem: 'assets/aspirina.jpg',
+    imagem: 'lib/images/aspirina.jpg',
     preco: 5.0,
   ),
 ];

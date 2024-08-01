@@ -1,7 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EnviarReceitaPage extends StatelessWidget {
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _telefoneController = TextEditingController();
+  final TextEditingController _medicamentoController = TextEditingController();
+
+  void _salvarValores() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString("nome", _nomeController.text);
+    await prefs.setString("telefone", _telefoneController.text);
+    await prefs.setString("medicamento", _medicamentoController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +33,6 @@ class EnviarReceitaPage extends StatelessWidget {
           ),
           // Título "Receitas"
           Padding(
-
             padding: EdgeInsets.all(10),
             child: Container(
               alignment: Alignment.center,
@@ -32,19 +44,19 @@ class EnviarReceitaPage extends StatelessWidget {
               child: Text(
                 'Receitas',
                 style: TextStyle(
-                   fontSize: 20,
-                   fontWeight: FontWeight.bold,
-                   color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
               ),
             ),
           ),
-    // Campo para preenchimento de nome
-          _buildTextField('Nome'),
+          // Campo para preenchimento de nome
+          _buildTextField('Nome', _nomeController),
           // Campo para preenchimento de telefone
-          _buildTextField('Telefone'),
+          _buildTextField('Telefone', _telefoneController),
           // Campo para preenchimento de medicamento
-          _buildTextField('Medicamento'),
+          _buildTextField('Medicamento', _medicamentoController),
           // Campo para anexar arquivo
           _buildFilePicker(),
           // Botão de enviar
@@ -52,7 +64,7 @@ class EnviarReceitaPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20),
             child: ElevatedButton(
               onPressed: () {
-                // Implemente a lógica para enviar a receita
+                _salvarValores();
               },
               child: Text('Enviar'),
             ),
@@ -62,10 +74,11 @@ class EnviarReceitaPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String labelText) {
+  Widget _buildTextField(String labelText, TextEditingController controller) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
           border: OutlineInputBorder(),
