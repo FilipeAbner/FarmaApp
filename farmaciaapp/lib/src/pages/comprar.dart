@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../medicamento.dart';
 
 class ComprarPage extends StatelessWidget {
   @override
@@ -82,23 +83,6 @@ class ComprarPage extends StatelessWidget {
       ),
     );
   }
-}
-
-class Medicamento {
-  final String nome;
-  final String imagem;
-  final double preco;
-  final double precoAntigo;
-  final double?
-      precoDesconto; // Tornando o parâmetro opcional usando o tipo double?
-
-  Medicamento({
-    required this.nome,
-    required this.imagem,
-    required this.preco,
-    this.precoAntigo = 0,
-    this.precoDesconto, // Parâmetro opcional
-  });
 }
 
 // Lista de medicamentos de exemplo
