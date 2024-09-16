@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'pages/HomePage.dart';
+import 'database/database.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigateToHome() async {
+    DB();
     await Future.delayed(Duration(seconds: 5), () {});
     Navigator.pushReplacement(
       context,

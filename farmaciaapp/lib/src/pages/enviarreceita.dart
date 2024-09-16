@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_picker/file_picker.dart';
 
 class EnviarReceitaPage extends StatelessWidget {
   final TextEditingController _nomeController = TextEditingController();
@@ -19,12 +20,12 @@ class EnviarReceitaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: <Widget>[
           // Logo da farmácia
           Container(
             alignment: Alignment.topCenter,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Image.asset(
               'lib/images/logo.png',
               height: 250,
@@ -33,7 +34,7 @@ class EnviarReceitaPage extends StatelessWidget {
           ),
           // Título "Receitas"
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Container(
               alignment: Alignment.center,
               width: double.infinity,
@@ -41,7 +42,7 @@ class EnviarReceitaPage extends StatelessWidget {
                 color: Colors.blueAccent, // Cor de fundo do quadrado azul
                 borderRadius: BorderRadius.circular(30), // Borda arredondada
               ),
-              child: Text(
+              child: const Text(
                 'Receitas',
                 style: TextStyle(
                   fontSize: 20,
@@ -61,12 +62,12 @@ class EnviarReceitaPage extends StatelessWidget {
           _buildFilePicker(),
           // Botão de enviar
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: ElevatedButton(
               onPressed: () {
                 _salvarValores();
               },
-              child: Text('Enviar'),
+              child: const Text('Enviar'),
             ),
           ),
         ],
@@ -76,12 +77,12 @@ class EnviarReceitaPage extends StatelessWidget {
 
   Widget _buildTextField(String labelText, TextEditingController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
           labelText: labelText,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );
@@ -89,10 +90,10 @@ class EnviarReceitaPage extends StatelessWidget {
 
   Widget _buildFilePicker() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: TextField(
               decoration: InputDecoration(
                 labelText: 'Anexar arquivo',
@@ -100,15 +101,24 @@ class EnviarReceitaPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           IconButton(
             onPressed: () {
-              // Implemente a lógica para selecionar o arquivo
+              pickFile();
             },
-            icon: Icon(Icons.attach_file),
+            icon: const Icon(Icons.attach_file),
           ),
         ],
       ),
     );
   }
+}
+
+Future<FilePickerResult?> pickFile() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  if(result != null){
+    print(result);
+  }
+  return null;
 }

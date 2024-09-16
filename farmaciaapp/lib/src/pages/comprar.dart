@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import '../medicamento.dart';
+import '../models/medicamento.dart';
 
 class ComprarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Medicamento.findAll().then(
+      (value) => {
+        medicamentos = value,
+      },
+    );
     return Scaffold(
       body: ListView.builder(
         itemCount: medicamentos.length,
@@ -57,7 +62,7 @@ class ComprarPage extends StatelessWidget {
                         SizedBox(width: 8),
                         Text(
                           'Por: ${medicamento.precoDesconto!.toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors
                                 .green, // Cor verde para o preço com desconto
@@ -68,7 +73,7 @@ class ComprarPage extends StatelessWidget {
                   else // Caso contrário, exibe apenas o preço padrão
                     Text(
                       medicamento.preco.toStringAsFixed(2),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors
@@ -86,29 +91,4 @@ class ComprarPage extends StatelessWidget {
 }
 
 // Lista de medicamentos de exemplo
-List<Medicamento> medicamentos = [
-  Medicamento(
-    nome: 'Paracetamol',
-    imagem: 'lib/images/paracetamol.jpg',
-    preco: 10.0,
-    precoAntigo: 12.0,
-    precoDesconto: 9.0,
-  ),
-  Medicamento(
-    nome: 'Ibuprofeno',
-    imagem: 'lib/images/ibuprofeno.jpg',
-    preco: 15.0,
-  ),
-  Medicamento(
-    nome: 'Dipirona',
-    imagem: 'lib/images/dipirona.jpg',
-    preco: 8.0,
-    precoAntigo: 10.0,
-    precoDesconto: 7.0,
-  ),
-  Medicamento(
-    nome: 'Aspirina',
-    imagem: 'lib/images/aspirina.jpg',
-    preco: 5.0,
-  ),
-];
+List<Medicamento> medicamentos = [];
